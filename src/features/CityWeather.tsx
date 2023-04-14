@@ -4,34 +4,39 @@ import {skipToken} from "@reduxjs/toolkit/query";
 import CompareWithCities from "./CompareWithCities";
 import {
     CityName,
-    CityWeatherBox,
+    Box,
     CityWeatherContainer,
-    CityWeatherPropertiesBox,
-    CityWeatherTextField,
-    WeatherProperties,
+    PropertiesBox,
+    TextField,
+    WeatherProperties, ErrorMessage,
 } from "../styles/CityWeather.components";
+import {TailSpin} from "react-loader-spinner";
 
 export default function CityWeather() {
     const {cityName} = useParams()
     const {
         data: cityWeather,
+        isLoading: cityWeatherIsLoading,
         error: cityWeatherError,
         isError: cityWeatherIsError
     } = useCityWeatherQuery(cityName && cityName !== "" ? cityName : skipToken)
-
+    console.log(cityWeatherError)
     return (
         <>
-            {cityWeather &&
+            {cityWeatherIsLoading && <TailSpin color={"#5f9ea0"}/>}
+            {cityWeatherIsError && cityWeatherError && "message" in cityWeatherError &&
+                <ErrorMessage>{cityWeatherError.message}</ErrorMessage>}
+            {!cityWeatherIsError && cityWeather &&
                 <>
                     <CityWeatherContainer>
-                        <CityWeatherBox><CityName>{cityWeather.name}</CityName></CityWeatherBox>
-                        <CityWeatherBox>
-                            <CityWeatherPropertiesBox>
-                                <CityWeatherTextField><WeatherProperties>Temperatura: </WeatherProperties>{cityWeather.temperature} &#176;C</CityWeatherTextField>
-                                <CityWeatherTextField><WeatherProperties>Wiatr: </WeatherProperties>{cityWeather.wind} m/s</CityWeatherTextField>
-                                <CityWeatherTextField><WeatherProperties>Wilgotność: </WeatherProperties> {cityWeather.humidity} %</CityWeatherTextField>
-                            </CityWeatherPropertiesBox>
-                        </CityWeatherBox>
+                        <Box><CityName>{cityWeather.name}</CityName></Box>
+                        <Box>
+                            <PropertiesBox>
+                                <TextField><WeatherProperties>Temperatura: </WeatherProperties>{cityWeather.temperature} &#176;C</TextField>
+                                <TextField><WeatherProperties>Wiatr: </WeatherProperties>{cityWeather.wind} m/s</TextField>
+                                <TextField><WeatherProperties>Wilgotność: </WeatherProperties> {cityWeather.humidity} %</TextField>
+                            </PropertiesBox>
+                        </Box>
                     </CityWeatherContainer>
                     <CompareWithCities mainCity={cityWeather}/>
                 </>

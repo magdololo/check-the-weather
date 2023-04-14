@@ -1,4 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {strict} from "assert";
 
 
 export interface CityWeather {
@@ -22,13 +23,21 @@ export const weatherSlice = createApi({
                 main: { temp: number, humidity: number },
                 wind: { speed: number }
             }, meta, arg) => {
-                const cityWeather = {
+                return {
                     name: response.name,
                     temperature: Math.floor(response.main.temp),
                     humidity: response.main.humidity,
                     wind: Math.floor(response.wind.speed)
                 }
-                return cityWeather
+            },
+            transformErrorResponse: (response: {
+                status: number, data: { cod: number, message: string }
+            }): { message: string } => {
+                let errorMessage: { message: string } = {message: "Oops coś poszło nie tak!q="}
+                if (response.status === 404) {
+                    errorMessage = {message: "Nie ma takiego miasta."}
+                }
+                return errorMessage
             },
         })
     }),

@@ -1,54 +1,50 @@
-# Getting Started with Create React App
+# Check the weather
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using
-the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+## Application description
 
-## Available Scripts
+Check the weather is simple web application that allows you to check actual weather for the city that you searched for.
+It will also show you weather for few pre-configured cities and show differences for temperature, humidity and wind
+speed.
 
-In the project directory, you can run:
+## Local development setup
 
-### `npm start`
+Due to usage of external API(openweathermap.org) for application to be running we need to have dedicated api key.
+To use it you need to create new file in main project folder named `.env`.
+Add to file below line and replace `YOUR_API_KEY` with api key provided by openweathermap.org
+`REACT_APP_WEATHER_API_KEY=YOUR_API_KEY`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### To run application
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+`npm install`
+`npm start`
 
-### `npm test`
+### Technologies/libraries
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more
-information.
+Initial setup done by Create React App
 
-### `npm run build`
+- Languages: `Typescript`
+- Libraries: `React`, `Redux-toolkit`, `React-router`
+- Styling: `styled components`
+- Testing: `Jest`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Testing
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+You can run unit tests by `npm run test`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Assumptions
 
-### `npm run eject`
+- Cities to compare - predefined list of cities stored as array in `config.ts`, depending on the needs list can be
+  extended
+- Language - currently only one language supported, pl, but api can support other languages if needed and application
+  can use libraries like `i18next` to be multilingual
+- Units - application is set to metric system but if needed can be changed
+- Weather properties - currently only temperature, humidity and wind speed are shown in application but api provides
+  much more data that could be used to show more detailed information about the weather for the given cities
+- City not found - when user searches for a city that is not supported by the api application shows information that the
+  city is not available
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Features that can be added
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will
-remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right
-into your project so you have full control over them. All of the commands except `eject` will still work, but they will
-point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you
-shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t
-customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in
-the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Autocomplete - application could show suggestions for the city name when user types in search input. That would
+  require to use other data source to get the list of available cities.
+- Selectable list of cities to compare - user could define list of cities with which main city weather would be compared
