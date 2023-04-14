@@ -5,7 +5,6 @@ import {
     TextField,
     WeatherProperties
 } from "../styles/CityCompare.components";
-import {Divider} from "../styles/CompareWithCities.components";
 import {ErrorMessage} from "../styles/CityWeather.components";
 
 interface CityCompareProps {

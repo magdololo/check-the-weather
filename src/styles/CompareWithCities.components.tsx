@@ -21,7 +21,7 @@ export const PanelWithCities = styled.div`
 export const Divider = styled.hr`
   width: 50%;
   margin: 20px auto;
-  border-width: 0px;
+  border-width: 0;
   border-style: solid;
   border-color: rgba(117, 176, 178, .7);
   border-bottom-width: thin;

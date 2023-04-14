@@ -31,7 +31,7 @@ export const handlers = [
     rest.get('https://api.openweathermap.org/data/2.5/weather', (req, res, ctx) => {
         let cityWeather = req.url.searchParams.get('q')
         console.log(res)
-        let cityWeatherResponse: WeatherApiResponse | WeatherApiResponseError | null = null
+        let cityWeatherResponse: WeatherApiResponse | WeatherApiResponseError | null
         switch (cityWeather) {
             case 'searchCity':
                 cityWeatherResponse =

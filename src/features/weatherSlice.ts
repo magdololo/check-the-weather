@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {strict} from "assert";
+
 
 
 export interface CityWeather {
@@ -22,7 +22,7 @@ export const weatherSlice = createApi({
                 name: string,
                 main: { temp: number, humidity: number },
                 wind: { speed: number }
-            }, meta, arg) => {
+            }) => {
                 return {
                     name: response.name,
                     temperature: Math.floor(response.main.temp),
